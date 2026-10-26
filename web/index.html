@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Local-first repository hygiene and readiness scanner.">
+  <title>Repo Guardian — Repository health</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Repo Guardian home"><span class="brand-mark">RG</span><span>repo<span class="muted">guardian</span></span></a>
+      <span class="privacy"><span class="dot"></span> Local-first · No uploads</span>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">REPOSITORY READINESS, WITHOUT THE NOISE</p>
+        <h1>Ship with <span>confidence.</span></h1>
+        <p class="lede">A practical baseline audit for the project you’re about to publish, hand off, or deploy. Your files stay on this machine.</p>
+      </section>
+      <section class="scan-panel">
+        <div class="panel-heading"><div><span class="step">01</span><h2>Choose a repository</h2></div><span class="local-tag">LOCAL SCAN</span></div>
+        <form id="scan-form">
+          <label for="repo-path">Absolute directory path</label>
+          <div class="path-row">
+            <input id="repo-path" name="path" autocomplete="off" spellcheck="false" placeholder="/home/you/code/my-project" required>
+            <button id="scan-button" type="submit"><span>Scan repository</span><span aria-hidden="true">↗</span></button>
+          </div>
+          <p class="help">Examples: <code>/Users/you/dev/app</code> · <code>C:\Users\you\source\app</code> · <code>/home/you/project</code></p>
+        </form>
+        <div id="status" class="status" role="status" aria-live="polite">Ready when you are. Nothing is uploaded or transmitted externally.</div>
+      </section>
+      <section id="results" class="results hidden" aria-live="polite">
+        <div class="results-title"><div><p class="eyebrow">SCAN REPORT</p><h2 id="repo-name">Repository</h2><p id="report-meta" class="muted"></p></div><button id="export-button" class="secondary" type="button">Export JSON ↓</button></div>
+        <div class="score-grid">
+          <div class="score-card score-main"><div class="score-ring"><span id="score">—</span><small>/100</small></div><div><h3>Readiness score</h3><p id="score-caption">Based on detected baseline issues</p></div></div>
+          <div class="metric"><span class="metric-label">Critical</span><strong id="critical" class="critical-text">0</strong></div>
+          <div class="metric"><span class="metric-label">Warnings</span><strong id="warning">0</strong></div>
+          <div class="metric"><span class="metric-label">Info</span><strong id="info">0</strong></div>
+        </div>
+        <div class="findings-head"><h3>Findings</h3><div class="filters" role="group" aria-label="Filter findings"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="critical">Critical</button><button class="filter" data-filter="warning">Warnings</button><button class="filter" data-filter="info">Info</button></div></div>
+        <div id="findings" class="finding-list"></div>
+        <p class="disclaimer">This tool runs heuristic checks, not a full security audit. Validate findings manually. Secret-like line contents are never included in the report.</p>
+      </section>
+      <section class="checks">
+        <div><span class="check-icon">✓</span><div><strong>Baseline project hygiene</strong><p>README, license, Git ignore rules, CI and lockfiles.</p></div></div>
+        <div><span class="check-icon">⌁</span><div><strong>Secret exposure heuristics</strong><p>Common token patterns, private keys and local environment files.</p></div></div>
+        <div><span class="check-icon">◷</span><div><strong>Local by design</strong><p>No accounts, telemetry, cloud uploads, or external API keys.</p></div></div>
+      </section>
+    </main>
+    <footer><span>REPO GUARDIAN <span class="muted">· v0.1.0</span></span><span>Built for safer shipping.</span></footer>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
